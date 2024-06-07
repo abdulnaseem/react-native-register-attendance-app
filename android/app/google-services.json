@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "4130206772",
+    "project_id": "register-attendance-app",
+    "storage_bucket": "register-attendance-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:4130206772:android:8fa6898820b4c5717a0661",
+        "android_client_info": {
+          "package_name": "com.registerattendanceapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4DwrpjCOZ2KPgkQaXhd2qiHdt9Q_SJYc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

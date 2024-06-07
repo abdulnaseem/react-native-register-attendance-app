@@ -34,7 +34,7 @@ const Register = ({navigation}) => {
             </View>
 
             <View>
-                <Button title='Register Now' />
+                <Button title='Register Now' onPress={() => navigation.navigate(Routes.Home)} />
             </View>
 
             <View style={{marginTop: 15}}>

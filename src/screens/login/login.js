@@ -29,7 +29,7 @@ const Login = ({navigation}) => {
             </View>
 
             <View>
-                <Button title='Login' />
+                <Button title='Login' onPress={() => navigation.navigate(Routes.Home)} />
             </View>
 
             <View style={{marginTop: 15}}>

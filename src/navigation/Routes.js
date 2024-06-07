@@ -1,4 +1,5 @@
 export const Routes = {
     Login: 'Login',
-    Registration: 'Registration'
+    Registration: 'Registration',
+    Home: 'Home'
 }
