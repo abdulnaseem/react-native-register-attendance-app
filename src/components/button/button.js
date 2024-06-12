@@ -5,7 +5,7 @@ import style from './button.styled';
 const Button = ({
    title = '', 
    isDisabled = false, 
-   onPress = () => {}
+   onPress = () => {},
 }) => (
 
  <Pressable
