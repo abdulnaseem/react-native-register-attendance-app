@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {StyleSheet, View, Text, TextInput, Pressable, Header} from 'react-native';
+import {StyleSheet, View, Text, TextInput} from 'react-native';
 import Button from '../../components/button/button';
 import { Routes } from '../../navigation/Routes';
 import { horizontalScale, verticalScale, scaleFontSize } from '../../../assets/scaling';
@@ -16,48 +16,40 @@ const Login = ({navigation}) => {
     const dispatch = useDispatch();
     //dispatch(resetToInitialState());
     return (
-        <View
-          style={[
-              styles.container,
-              {
-              // Try setting `flexDirection` to `"row"`.
-              flexDirection: 'column',
-              },
-        ]}>
+      <View style={[styles.container, {flexDirection: 'column'}]}>
 
-            <View style={[styles.title]}>
-                <Text style={[styles.montserratandbold]}>Tahawi Institute</Text>
-                <Text style={[styles.montserratandbold]}>Portal</Text>
-            </View>
-
-            <View style={{flex: 2, justifyContent: 'flex-start'}}>
-                <TextInput style={[styles.input]} placeholder='email' placeholderTextColor="#003f5c" onChangeText={(text) => setEmail(text)} />
-                <TextInput style={[styles.input]} placeholder='password' placeholderTextColor="#003f5c" onChangeText={(text) => setPassword(text)} />
-                {error.length > 0 ? <Text style={styles.error}>{error}</Text> : <Text></Text>}
-            </View>
-            
-            <View>
-                <Button title='Login' 
-                        
-                        onPress={async () => {
-                          let user = await loginUser(email, password);
-                          console.log('User Data: ' + user);
-                          if(!user.status) {
-                            setError(user.error);
-                          }
-                          else {
-                            setError('');
-                            dispatch(logIn(user));
-                            navigation.navigate(Routes.Home);
-                          }
-                        }} />
-            </View>
-
-            <View style={{marginTop: 15}}>
-                <Button title='Register Here' onPress={() => navigation.navigate(Routes.Registration)} />
-            </View>
-
+        <View style={[styles.title]}>
+          <Text style={[styles.montserratandbold]}>Tahawi Institute</Text>
+          <Text style={[styles.montserratandbold]}>Portal</Text>
         </View>
+
+        <View style={{flex: 2, justifyContent: 'flex-start'}}>
+          <TextInput style={[styles.input]} placeholder='email' placeholderTextColor="#003f5c" onChangeText={(text) => setEmail(text)} />
+          <TextInput style={[styles.input]} placeholder='password' placeholderTextColor="#003f5c" onChangeText={(text) => setPassword(text)} />
+          {error.length > 0 ? <Text style={styles.error}>{error}</Text> : <Text></Text>}
+        </View>
+            
+        <View>
+          <Button title='Login' 
+                  onPress={async () => {
+                    let user = await loginUser(email, password);
+                    console.log('User Data: ' + user);
+                    if(!user.status) {
+                      setError(user.error);
+                    }
+                    else {
+                      setError('');
+                      dispatch(logIn(user));
+                      navigation.navigate(Routes.Home);
+                    }
+          }} />
+        </View>
+
+        <View style={{marginTop: 15}}>
+          <Button title='Register Here' onPress={() => navigation.navigate(Routes.Registration)} />
+        </View>
+
+      </View>
     );
 };
 

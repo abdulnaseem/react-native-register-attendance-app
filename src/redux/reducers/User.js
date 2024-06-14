@@ -1,5 +1,5 @@
 // Importing the createSlice function from the Redux Toolkit
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 // Defining the initial state for the user slice of the store
 const initialState = {

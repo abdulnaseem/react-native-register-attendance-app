@@ -36,7 +36,7 @@ const Register = ({navigation}) => {
     // }
 
     const registerUsers = async () => {
-      let user = await registerUser(name, number, email, password)
+      let user = await registerUser(name, number, email, password);
       console.log(user);
       if(user.error) {
         setError(user.error);
@@ -50,78 +50,51 @@ const Register = ({navigation}) => {
 
     return (
       <SafeAreaView style={[globalStyle.backgroundWhite, globalStyle.flex]}>
+
         <View style={styles.backButton}>
           <BackButton onPress={() => navigation.goBack()} />
         </View>
+
         <ScrollView style={[styles.containerTwos]} keyboardShouldPersistTaps={'always'}>
+
+          <View style={[styles.title]}>
+            <Text style={[styles.montserratandbold, {marginTop: 80,}]}>Registration</Text>
+          </View>
           
-          {/* <View
-            style={[
-                styles.container,
-                {
-                // Try setting `flexDirection` to `"row"`.
-                flexDirection: 'column',
-                },
-          ]}> */}
+          <View style={{flex: 2, justifyContent: 'flex-start', marginLeft: 15, marginRight: 15}}>
 
-              <View style={[styles.title]}>
-                  <Text style={[styles.montserratandbold, {marginTop: 80,}]}>Registration</Text>
-              </View>
-
-              <View style={{flex: 2, justifyContent: 'flex-start', marginLeft: 15, marginRight: 15}}>
-                  {/* <TextInput style={[styles.input]} value={name} placeholder='fullname' placeholderTextColor="#003f5c" onChangeText={(value) => {setName(value)}} />
-                  <TextInput style={[styles.input]} keyboardType='numeric' value={number} placeholder='mobile number' placeholderTextColor="#003f5c" onChangeText={(value) => setNumber(value)} />
-                  <TextInput style={[styles.input]} keyboardType='email-address' value={email} placeholder='email' placeholderTextColor="#003f5c" onChangeText={(value) => setEmail(value)} />
-                  <TextInput style={[styles.input]} secureTextEntry={true} value={password} placeholder='password' placeholderTextColor="#003f5c" onChangeText={(value) => setPassword(value)} /> */}
+            <View style={{marginBottom: 15}}>
+              <Input label={'Fullname'} placeholder={'Enter your full name...'} onChangeText={value => setName(value)} />
+            </View>
                   
-                  <View style={{marginBottom: 15}}>
-                    <Input
-                      label={'Fullname'}
-                      placeholder={'Enter your full name...'}
-                      onChangeText={value => setName(value)}
-                    />
-                  </View>
-                  
-                  <View style={{marginBottom: 15}}>
-                    <Input
-                      label={'Contact Number'}
-                      placeholder={'Enter your number...'}
-                      onChangeText={value => setNumber(value)}
-                    />
-                  </View>
+            <View style={{marginBottom: 15}}>
+              <Input label={'Contact Number'} placeholder={'Enter your number...'} onChangeText={value => setNumber(value)} />
+            </View>
 
-                  <View style={{marginBottom: 15}}>  
-                    <Input
-                      keyboardType={'email-address'}
-                      label={'Email'}
-                      placeholder={'Enter your email...'}
-                      onChangeText={value => {
+            <View style={{marginBottom: 15}}>  
+              <Input keyboardType={'email-address'} label={'Email'} placeholder={'Enter your email...'} 
+                    onChangeText={value => {
                         setEmail(value)
                       }}
-                    />
-                  </View>
+              />
+            </View>
                   
-                  <View style={{marginBottom: 15}}>
-                    <Input
-                      secureTextEntry={true}
-                      label={'Password'}
-                      placeholder={'******'}
-                      onChangeText={value => setPassword(value)}
-                    />
-                  </View>
-              </View>
+            <View style={{marginBottom: 15}}>
+              <Input secureTextEntry={true} label={'Password'} placeholder={'******'} onChangeText={value => setPassword(value)} />
+            </View>
 
-              {error.length > 0 ? <Text style={[styles.registerStatus, {color: '#FF0000'}]}>{error}</Text> : 
-                                  <Text style={[styles.registerStatus, {color: '#28a745'}]}>{success}</Text>}
-              {/* {success.length > 0 ? <Text style={styles.success}>{success}</Text> : <Text></Text>} */}
+          </View>
 
-              <View style={[styles.registrationButton, {marginBottom: 15}]}>
-                  <Button title='Register Now' 
-                          isDisabled={name.length <= 2 || email.length <=5 || password.length <= 8}
-                          onPress={registerUsers} />
-              </View>
+          {error.length > 0 ? <Text style={[styles.registerStatus, {color: '#FF0000'}]}>{error}</Text> : 
+                              <Text style={[styles.registerStatus, {color: '#28a745'}]}>{success}</Text>}
+          {/* {success.length > 0 ? <Text style={styles.success}>{success}</Text> : <Text></Text>} */}
 
-          {/* </View> */}
+          <View style={[styles.registrationButton, {marginBottom: 15}]}>
+            <Button title='Register Now' 
+                    isDisabled={name.length <= 2 || email.length <=5 || password.length <= 8}
+                    onPress={registerUsers} />
+          </View>
+
         </ScrollView>
       </SafeAreaView> 
         
