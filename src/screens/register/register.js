@@ -53,7 +53,7 @@ const Register = ({navigation}) => {
         <View style={styles.backButton}>
           <BackButton onPress={() => navigation.goBack()} />
         </View>
-        <ScrollView style={[styles.containerTwos]}>
+        <ScrollView style={[styles.containerTwos]} keyboardShouldPersistTaps={'always'}>
           
           {/* <View
             style={[
@@ -68,44 +68,52 @@ const Register = ({navigation}) => {
                   <Text style={[styles.montserratandbold, {marginTop: 80,}]}>Registration</Text>
               </View>
 
-              <View style={{flex: 2, justifyContent: 'flex-start'}}>
+              <View style={{flex: 2, justifyContent: 'flex-start', marginLeft: 15, marginRight: 15}}>
                   {/* <TextInput style={[styles.input]} value={name} placeholder='fullname' placeholderTextColor="#003f5c" onChangeText={(value) => {setName(value)}} />
                   <TextInput style={[styles.input]} keyboardType='numeric' value={number} placeholder='mobile number' placeholderTextColor="#003f5c" onChangeText={(value) => setNumber(value)} />
                   <TextInput style={[styles.input]} keyboardType='email-address' value={email} placeholder='email' placeholderTextColor="#003f5c" onChangeText={(value) => setEmail(value)} />
                   <TextInput style={[styles.input]} secureTextEntry={true} value={password} placeholder='password' placeholderTextColor="#003f5c" onChangeText={(value) => setPassword(value)} /> */}
                   
-                  <Input
-                    label={'Fullname'}
-                    placeholder={'Enter your full name...'}
-                    onChangeText={value => setName(value)}
-                  />
-
-                  <Input
-                    label={'Contact Number'}
-                    placeholder={'Enter your number...'}
-                    onChangeText={value => setNumber(value)}
-                  />
-
-                  <Input
-                    keyboardType={'email-address'}
-                    label={'Email'}
-                    placeholder={'Enter your email...'}
-                    onChangeText={value => {
-                      setEmail(value)
-                    }}
-                  />
+                  <View style={{marginBottom: 15}}>
+                    <Input
+                      label={'Fullname'}
+                      placeholder={'Enter your full name...'}
+                      onChangeText={value => setName(value)}
+                    />
+                  </View>
                   
-                  <Input
-                    secureTextEntry={true}
-                    label={'Password'}
-                    placeholder={'******'}
-                    onChangeText={value => setPassword(value)}
-                  />
+                  <View style={{marginBottom: 15}}>
+                    <Input
+                      label={'Contact Number'}
+                      placeholder={'Enter your number...'}
+                      onChangeText={value => setNumber(value)}
+                    />
+                  </View>
+
+                  <View style={{marginBottom: 15}}>  
+                    <Input
+                      keyboardType={'email-address'}
+                      label={'Email'}
+                      placeholder={'Enter your email...'}
+                      onChangeText={value => {
+                        setEmail(value)
+                      }}
+                    />
+                  </View>
+                  
+                  <View style={{marginBottom: 15}}>
+                    <Input
+                      secureTextEntry={true}
+                      label={'Password'}
+                      placeholder={'******'}
+                      onChangeText={value => setPassword(value)}
+                    />
+                  </View>
               </View>
 
-              {error.length > 0 && <Text style={styles.error}>{error}</Text>}
-              {success.length > 0 && <Text style={styles.success}>{success}</Text>}
-              {/* {!emailValidation && <Text style={styles.error}>Please enter correct tahawi email address.</Text>} */}
+              {error.length > 0 ? <Text style={[styles.registerStatus, {color: '#FF0000'}]}>{error}</Text> : 
+                                  <Text style={[styles.registerStatus, {color: '#28a745'}]}>{success}</Text>}
+              {/* {success.length > 0 ? <Text style={styles.success}>{success}</Text> : <Text></Text>} */}
 
               <View style={[styles.registrationButton, {marginBottom: 15}]}>
                   <Button title='Register Now' 
@@ -163,16 +171,19 @@ const styles = StyleSheet.create({
     marginLeft: horizontalScale(14),
     marginTop: verticalScale(7),
   },
-  error: {
+  registerStatus: {
     fontSize: scaleFontSize(16),
     color: '#FF0000',
     marginBottom: verticalScale(24),
-    marginLeft: horizontalScale(20)
+    marginLeft: horizontalScale(20),
+    marginLeft: 15
   },
   success: {
     fontSize: scaleFontSize(16),
     color: '#28a745',
-    marginBottom: verticalScale(24)
+    marginBottom: verticalScale(24),
+    marginTop: -30,
+    marginLeft: 15
   }
 });
 

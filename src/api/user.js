@@ -5,7 +5,7 @@ export const registerUser = async (fullName, number, email, password) => {
         const user = await auth().createUserWithEmailAndPassword(email, password);
         await user.user.updateProfile({
             displayName: fullName,
-            mobileNumber: number
+            phoneNumber: number
         });
         //console.log(user);
         return user;
@@ -19,4 +19,36 @@ export const registerUser = async (fullName, number, email, password) => {
         }
         return {error: 'Something went wrong with your request.'};
     }
+}
+
+export const loginUser = async (email, password) => {
+    try {
+        const response = await auth().signInWithEmailAndPassword(email, password);
+        const token = await response.user.getIdToken();
+        console.log(response);
+        console.log(token);
+        return {
+            status: true,
+            displayName: response.user.displayName,
+            email: response.user.email,
+            token,
+        }
+    }
+    catch(error) {
+        console.log(error)
+        if(error.code === 'auth/wrong-password') {
+            return {
+                status: false,
+                error: 'Please enter the correct password.'
+            }
+        }
+        return {
+            status: false,
+            error: 'Something went wrong.'
+        }
+    }
+}
+
+export const logoutUser = async () => {
+    await auth().signOut();
 }

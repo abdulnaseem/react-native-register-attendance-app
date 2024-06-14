@@ -2,20 +2,27 @@ import React, { useState } from 'react';
 import {StyleSheet, View, Text, TextInput, Pressable, Header} from 'react-native';
 import Button from '../../components/button/button';
 import { Routes } from '../../navigation/Routes';
+import { horizontalScale, verticalScale, scaleFontSize } from '../../../assets/scaling';
+import { loginUser } from '../../api/user';
+import { useDispatch } from 'react-redux';
+import { logIn, resetToInitialState } from '../../redux/reducers/User';
 
 const Login = ({navigation}) => {
 
-    const [email, setEmail] = useState('email');
-    const [password, setPassword] = useState('password');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
+    const dispatch = useDispatch();
+    //dispatch(resetToInitialState());
     return (
         <View
-        style={[
-            styles.container,
-            {
-            // Try setting `flexDirection` to `"row"`.
-            flexDirection: 'column',
-            },
+          style={[
+              styles.container,
+              {
+              // Try setting `flexDirection` to `"row"`.
+              flexDirection: 'column',
+              },
         ]}>
 
             <View style={[styles.title]}>
@@ -24,12 +31,26 @@ const Login = ({navigation}) => {
             </View>
 
             <View style={{flex: 2, justifyContent: 'flex-start'}}>
-                <TextInput style={[styles.input]} placeholder={email} placeholderTextColor="#003f5c" onChangeText={(text) => setEmail} />
-                <TextInput style={[styles.input]} placeholder={password} placeholderTextColor="#003f5c" onChangeText={(text) => setPassword} />
+                <TextInput style={[styles.input]} placeholder='email' placeholderTextColor="#003f5c" onChangeText={(text) => setEmail(text)} />
+                <TextInput style={[styles.input]} placeholder='password' placeholderTextColor="#003f5c" onChangeText={(text) => setPassword(text)} />
+                {error.length > 0 ? <Text style={styles.error}>{error}</Text> : <Text></Text>}
             </View>
-
+            
             <View>
-                <Button title='Login' onPress={() => navigation.navigate(Routes.Home)} />
+                <Button title='Login' 
+                        
+                        onPress={async () => {
+                          let user = await loginUser(email, password);
+                          console.log('User Data: ' + user);
+                          if(!user.status) {
+                            setError(user.error);
+                          }
+                          else {
+                            setError('');
+                            dispatch(logIn(user));
+                            navigation.navigate(Routes.Home);
+                          }
+                        }} />
             </View>
 
             <View style={{marginTop: 15}}>
@@ -71,6 +92,17 @@ const styles = StyleSheet.create({
   },
   registrationButton: {
     alignItems: 'center'
+  },
+  error: {
+    fontSize: scaleFontSize(16),
+    color: '#FF0000',
+    marginBottom: verticalScale(24),
+    marginLeft: horizontalScale(20)
+  },
+  success: {
+    fontSize: scaleFontSize(16),
+    color: '#28a745',
+    marginBottom: verticalScale(24)
   }
 });
 
