@@ -6,7 +6,7 @@ import Home from "../screens/home/home";
 
 const Stack = createStackNavigator();
 
-const MainNavigation = () => {
+export const NonAuthenticated = () => {
     return (
         <Stack.Navigator
             screenOptions={{ header: () => null, headerShow: false }}
@@ -14,10 +14,19 @@ const MainNavigation = () => {
             
             <Stack.Screen name={Routes.Login} component={Login} />
             <Stack.Screen name={Routes.Registration} component={Register} />
-            <Stack.Screen name={Routes.Home} component={Home} />
 
         </Stack.Navigator>
     )
 }
 
-export default MainNavigation;
+export const Authenticated = () => {
+    return (
+        <Stack.Navigator
+            screenOptions={{ header: () => null, headerShow: false }}
+            initialRouteName={Routes.Home}>
+            
+            <Stack.Screen name={Routes.Home} component={Home} />
+
+        </Stack.Navigator>
+    )
+}
